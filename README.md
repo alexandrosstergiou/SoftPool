@@ -65,11 +65,11 @@ from SoftPool import soft_pool3d, SoftPool3d
 
 ## ImageNet models
 
-All the ImageNet weights are available here: [[link]](https://drive.google.com/drive/folders/1XaJsZCNe5A-1e2qIlbj0rw-iBEHvh6BK?usp=sharing)
+All the ImageNet weights are available here: https://drive.google.com/drive/folders/1XaJsZCNe5A-1e2qIlbj0rw-iBEHvh6BK?usp=sharing
 ## Citation
 
 ```
-@article{stergiou2020refining,
+@article{ stergiou2020refining,
   title={Refining activation downsampling with SoftPool},
   author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},
   journal={arXiv preprint},
