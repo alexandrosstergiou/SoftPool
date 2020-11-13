@@ -5,8 +5,6 @@
 <!---![Library](https://img.shields.io/badge/library-Keras-red?logo=Keras)--->
 
 ![GitHub license](https://img.shields.io/cocoapods/l/AFNetworking)
-![Fork](https://img.shields.io/github/forks/alexandrosstergiou/SofPool?style=social)
-![Star](https://img.shields.io/github/stars/alexandrosstergiou/SoftPool?style=social)
 
 
 --------------------------------------------------------------------------------
@@ -64,7 +62,7 @@ from SoftPool import soft_pool3d, SoftPool3d
 
 ## ImageNet models
 
-All the ImageNet weights are avaliable here: [link deducted for blind review]
+All the ImageNet weights are available here: [link deducted for blind review - currently hosted on Google Drive]
 ## Citation
 
 [To be updated]
