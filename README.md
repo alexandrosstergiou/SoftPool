@@ -65,7 +65,7 @@ from SoftPool import soft_pool3d, SoftPool3d
 
 ## ImageNet models
 
-All the ImageNet weights are available here: https://drive.google.com/drive/folders/1XaJsZCNe5A-1e2qIlbj0rw-iBEHvh6BK?usp=sharing
+All the ImageNet weights are available here: shorturl.at/bchyU
 ## Citation
 
 ```
