@@ -1,12 +1,7 @@
 # Refining activation downsampling with SoftPool
 ![supported versions](https://img.shields.io/badge/python-3.5%2C3.6-brightgreen/?style=flat&logo=python&color=green)
 ![Library](https://img.shields.io/badge/library-PyTorch-blue?logo=Pytorch)
-<!---![Library](https://img.shields.io/badge/library-TensorFlow-orange?logo=Tensorflow)--->
-<!---![Library](https://img.shields.io/badge/library-Keras-red?logo=Keras)--->
-
 ![GitHub license](https://img.shields.io/cocoapods/l/AFNetworking)
-![Fork](https://img.shields.io/github/forks/alexandrosstergiou/SoftPool?style=social)
-![Star](https://img.shields.io/github/stars/alexandrosstergiou/SoftPool?style=social)
 
 
 --------------------------------------------------------------------------------
