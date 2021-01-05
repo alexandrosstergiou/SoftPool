@@ -11,7 +11,7 @@ Convolutional Neural Networks (CNNs) use pooling to decrease the size of activat
 <i></i>
 <br>
 <p align="center">
-<a href="https://arxiv.org/abs/2101.00440" target="blank" >[arXiv preprint]</a>
+<a href="#" target="blank" >[arXiv preprint coming soon]</a>
 </p>
 
 Image based pooling. Images are sub-sampled in both height and width by half.
