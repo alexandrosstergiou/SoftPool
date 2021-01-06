@@ -60,7 +60,22 @@ from SoftPool import soft_pool3d, SoftPool3d
 
 ## ImageNet models
 
-All the ImageNet weights are available [here]
+ImageNet weight can be downloaded from the following links:
+
+|Network|link|
+|:-----:|:--:|
+| ResNet-18 | [link](https://drive.google.com/file/d/11me4z74Fp4FkGGv_WbMZRQxTr4YJxUHS/view?usp=sharing) |
+| ResNet-34 | [link](https://drive.google.com/file/d/1-5O-r3hCJ7JSrrfVowrUZpaHcp7TcKKT/view?usp=sharing) |
+| ResNet-50 | [link](https://drive.google.com/file/d/1HpBESqJ-QLO_O0pozgh1T3xp4n5MOQLU/view?usp=sharing) |
+| ResNet-101 | [link](https://drive.google.com/file/d/1fng3DFm48W6h-qbFUk-IPZf9s8HsGbdw/view?usp=sharing) |
+| ResNet-152 | [link](https://drive.google.com/file/d/1ejuMgP4DK9pFcVnu1TZo6TELPlrhHJC_/view?usp=sharing) |
+| DenseNet-121 | [link](https://drive.google.com/file/d/1EXIbVI19JyEjgY75caZK2B2-gaxKTVpK/view?usp=sharing) |
+| DenseNet-161 | [link](https://drive.google.com/file/d/18Qs9XUXNPSgBe46_0OGZIcpvdoFZfjU5/view?usp=sharing) |
+| DenseNet-169 | [link](https://drive.google.com/file/d/1shFZV_AIZ6SQFQs-C0YThfpOfZH88hm7/view?usp=sharing) |
+| ResNeXt-50_32x4d | [link](hhttps://drive.google.com/file/d/1-3sd8paTlqa1X8KGUy6B5Eehv791tbVH/view?usp=sharing) |
+| ResNeXt-101_32x4d | [link](https://drive.google.com/file/d/1URDkwAPxDgcQzkYFlV_m-1T5RjZvzabo/view?usp=sharing) |
+| wide-ResNet50 | [link](https://drive.google.com/file/d/1X3A6P0enEJYLeNmY0pUTXA26FEQB1qMe/view?usp=sharing) |
+
 ## Citation
 
 ```
