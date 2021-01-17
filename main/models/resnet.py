@@ -393,10 +393,11 @@ def wide_resnet101_2(pretrained=False, progress=True, use_softpool=True, **kwarg
                    pretrained, progress, use_softpool, **kwargs)
 
 if __name__ == "__main__":
-    from ptflops import get_model_complexity_info
-    tmp = (3,224,224)
-    net = resnet152(use_softpool=False)
-    macs, params = get_model_complexity_info(net, tmp, as_strings=True,print_per_layer_stat=False, verbose=False)
-    print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
-    print('{:<30}  {:<8}'.format('Number of parameters: ', params))
-    print('network 1 test passed \n')
+    #from ptflops import get_model_complexity_info
+    #tmp = (3,224,224)
+    net = resnet18(use_softpool=False)
+    net.load_state_dict(torch.load('weights/resnet-18_best.pth'))
+    #macs, params = get_model_complexity_info(net, tmp, as_strings=True,print_per_layer_stat=False, verbose=False)
+    #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
+    #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
+    #print('network 1 test passed \n')

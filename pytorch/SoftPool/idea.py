@@ -10,6 +10,9 @@ import softpool_cuda
 class CUDA_SOFTPOOL1d(Function):
     @staticmethod
     def forward(ctx, input, kernel=2, stride=None):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not input.is_contiguous()):
+            x = input.contiguous()
         no_batch = False
         if len(input.size()) == 2:
             no_batch = True
@@ -32,6 +35,9 @@ class CUDA_SOFTPOOL1d(Function):
 
     @staticmethod
     def backward(ctx, grad_output):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not grad_output.is_contiguous()):
+            x = grad_output.contiguous()
         grad_input = torch.zeros_like(ctx.saved_tensors[0])
         saved = [grad_output] + list(ctx.saved_tensors) + [ctx.kernel, ctx.stride] + [grad_input]
         softpool_cuda.backward_1d(*saved)
@@ -43,6 +49,9 @@ class CUDA_SOFTPOOL1d(Function):
 class CUDA_SOFTPOOL2d(Function):
     @staticmethod
     def forward(ctx, input, kernel=2, stride=None):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not input.is_contiguous()):
+            x = input.contiguous()
         no_batch = False
         if len(input.size()) == 3:
             no_batch = True
@@ -66,6 +75,9 @@ class CUDA_SOFTPOOL2d(Function):
 
     @staticmethod
     def backward(ctx, grad_output):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not grad_output.is_contiguous()):
+            x = grad_output.contiguous()
         grad_input = torch.zeros_like(ctx.saved_tensors[0])
         saved = [grad_output] + list(ctx.saved_tensors) + [ctx.kernel,ctx.stride] + [grad_input]
         softpool_cuda.backward_2d(*saved)
@@ -77,6 +89,9 @@ class CUDA_SOFTPOOL2d(Function):
 class CUDA_SOFTPOOL3d(Function):
     @staticmethod
     def forward(ctx, input, kernel=2, stride=None):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not input.is_contiguous()):
+            x = input.contiguous()
         no_batch = False
         if len(input.size()) == 3:
             no_batch = True
@@ -101,6 +116,9 @@ class CUDA_SOFTPOOL3d(Function):
 
     @staticmethod
     def backward(ctx, grad_output):
+        # Create contiguous tensor (if tensor is not contiguous)
+        if (not grad_output.is_contiguous()):
+            x = grad_output.contiguous()
         grad_input = torch.zeros_like(ctx.saved_tensors[0])
         saved = [grad_output] + list(ctx.saved_tensors) + [ctx.kernel,ctx.stride] + [grad_input]
         softpool_cuda.backward_3d(*saved)
@@ -130,7 +148,11 @@ class CUDA_SOFTPOOL3d(Function):
 '''
 def soft_pool1d(x, kernel_size=2, stride=None, force_inplace=False):
     if x.is_cuda and not force_inplace:
-        return CUDA_SOFTPOOL1d.apply(x, kernel_size, stride)
+        x = CUDA_SOFTPOOL1d.apply(x, kernel_size, stride)
+        # Replace `NaN's if found
+        if torch.isnan(x).any():
+            return torch.nan_to_num(x)
+        return x
     kernel_size = _single(kernel_size)
     if stride is None:
         stride = kernel_size
@@ -138,8 +160,8 @@ def soft_pool1d(x, kernel_size=2, stride=None, force_inplace=False):
         stride = _single(stride)
     # Get input sizes
     _, c, d = x.size()
-    # Create per-element exponential value sum : Tensor [b x 1 x d]
-    e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    # Create per-element exponential value sum : Tensor [b x c x d]
+    e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d] -> [b x c x d']
     return F.avg_pool1d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool1d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
@@ -169,7 +191,11 @@ def soft_pool1d(x, kernel_size=2, stride=None, force_inplace=False):
 '''
 def soft_pool2d(x, kernel_size=2, stride=None, force_inplace=False):
     if x.is_cuda and not force_inplace:
-        return CUDA_SOFTPOOL2d.apply(x, kernel_size, stride)
+        x = CUDA_SOFTPOOL2d.apply(x, kernel_size, stride)
+        # Replace `NaN's if found
+        if torch.isnan(x).any():
+            return torch.nan_to_num(x)
+        return x
     kernel_size = _pair(kernel_size)
     if stride is None:
         stride = kernel_size
@@ -177,8 +203,8 @@ def soft_pool2d(x, kernel_size=2, stride=None, force_inplace=False):
         stride = _pair(stride)
     # Get input sizes
     _, c, h, w = x.size()
-    # Create per-element exponential value sum : Tensor [b x 1 x h x w]
-    e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    # Create per-element exponential value sum : Tensor [b x c x h x w]
+    e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x h x w] -> [b x c x h' x w']
     return F.avg_pool2d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool2d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
@@ -208,7 +234,11 @@ def soft_pool2d(x, kernel_size=2, stride=None, force_inplace=False):
 '''
 def soft_pool3d(x, kernel_size=2, stride=None, force_inplace=False):
     if x.is_cuda and not force_inplace:
-        return CUDA_SOFTPOOL3d.apply(x, kernel_size, stride)
+        x = CUDA_SOFTPOOL3d.apply(x, kernel_size, stride)
+        # Replace `NaN's if found
+        if torch.isnan(x).any():
+            return torch.nan_to_num(x)
+        return x
     kernel_size = _triple(kernel_size)
     if stride is None:
         stride = kernel_size
@@ -216,8 +246,8 @@ def soft_pool3d(x, kernel_size=2, stride=None, force_inplace=False):
         stride = _triple(stride)
     # Get input sizes
     _, c, d, h, w = x.size()
-    # Create per-element exponential value sum : Tensor [b x 1 x d x h x w]
-    e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    # Create per-element exponential value sum : Tensor [b x c x d x h x w]
+    e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d x h x w] -> [b x c x d' x h' x w']
     return F.avg_pool3d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool3d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))

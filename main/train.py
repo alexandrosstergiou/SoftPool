@@ -170,7 +170,7 @@ def main_worker(gpu, ngpus_per_node, args):
     # Load weights
     if args.pretrained is not None:
         print("=> using pre-trained model '{}' from dir '{}' ".format(args.arch,args.pretrained))
-        model.load_state_dict(torch.load(args.pretrained))
+        model.load_state_dict(torch.load(args.pretrained)['state_dict'])
     else:
         print("=> initialised model '{}'".format(args.arch))
 
