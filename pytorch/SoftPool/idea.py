@@ -164,7 +164,7 @@ def soft_pool1d(x, kernel_size=2, stride=None, force_inplace=False):
     e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d] -> [b x c x d']
-    return F.avg_pool1d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool1d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return F.avg_pool1d(x.mul(e_x), kernel_size, stride=stride).div_(F.avg_pool1d(e_x, kernel_size, stride=stride))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 1 D  ---
 '''
@@ -207,7 +207,7 @@ def soft_pool2d(x, kernel_size=2, stride=None, force_inplace=False):
     e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x h x w] -> [b x c x h' x w']
-    return F.avg_pool2d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool2d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return F.avg_pool2d(x.mul(e_x), kernel_size, stride=stride).div_(F.avg_pool2d(e_x, kernel_size, stride=stride))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 2 D  ---
 '''
@@ -250,7 +250,7 @@ def soft_pool3d(x, kernel_size=2, stride=None, force_inplace=False):
     e_x = torch.exp(x)
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d x h x w] -> [b x c x d' x h' x w']
-    return F.avg_pool3d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool3d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return F.avg_pool3d(x.mul(e_x), kernel_size, stride=stride).div_(F.avg_pool3d(e_x, kernel_size, stride=stride))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 3 D  ---
 '''
