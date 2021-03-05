@@ -3,7 +3,7 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 setup(
     name='SoftPool',
-    version='0.1',
+    version='1.0',
     description='CUDA-accelerated package for performing 1D/2D/3D SoftPool',
     author='Alexandros Stergiou',
     author_email='alexstergiou5@gmail.com',

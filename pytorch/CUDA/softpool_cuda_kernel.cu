@@ -76,7 +76,7 @@ __global__ void SoftPool1dForward(const int nthreads,
         scalar_t mask = exp(offset_bottom_input[offset]);
         mask = clamp(mask, zero, upper);
 
-        // Underflow check (D.) +FLT_MIN <= e^{inp[offset]}/sum{e^{inp[offset]}} <= 1
+        // Underflow check (D.) 0 <= e^{inp[offset]}/sum{e^{inp[offset]}} <= 1
         mask /=  mask_sum;
         mask = clamp(mask, zero, upper);
 
@@ -226,7 +226,7 @@ __global__ void SoftPool3dForward(const int nthreads,
             scalar_t mask = exp(offset_bottom_input[offset]);
             mask = clamp(mask, zero, upper);
 
-            // Underflow check (D.) +FLT_MIN <= e^{inp[offset]}/sum{e^{inp[offset]}} <= 1
+            // Underflow check (D.) 0 <= e^{inp[offset]}/sum{e^{inp[offset]}} <= 1
             mask /=  mask_sum;
             mask = clamp(mask, zero, upper);
 

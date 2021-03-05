@@ -11,7 +11,7 @@ Convolutional Neural Networks (CNNs) use pooling to decrease the size of activat
 <i></i>
 <br>
 <p align="center">
-<a href="#" target="blank" >[arXiv preprint coming soon]</a>
+<a href="https://arxiv.org/abs/2101.00440" target="blank" >[arXiv preprint ]</a>
 </p>
 
 Image based pooling. Images are sub-sampled in both height and width by half.
@@ -79,14 +79,17 @@ ImageNet weight can be downloaded from the following links:
 ## Citation
 
 ```
-@article{ stergiou2020refining,
+@article{ stergiou2021refining,
   title={Refining activation downsampling with SoftPool},
   author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},
-  journal={arXiv preprint},
-  year={2020}
+  journal={arXiv preprint arXiv:2101.00440},
+  year={2021}
 }
 ```
 
 ## Licence
 
 MIT
+
+## Additional resources
+A great project is Ren Tianhe's [`pytorh-pooling` repo](https://github.com/rentainhe/pytorch-pooling) for overviewing different pooling strategies.
