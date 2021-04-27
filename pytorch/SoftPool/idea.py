@@ -21,7 +21,7 @@ class CUDA_SOFTPOOL1d(Function):
             stride = kernel
         else:
             stride = _single(stride)
-        oD = D//stride[0]
+        oD = (D-kernel[0]) // stride[0] + 1
         output = input.new_zeros((B, C, oD))
         softpool_cuda.forward_1d(input.contiguous(), kernel, stride, output)
         ctx.save_for_backward(input)
@@ -56,8 +56,8 @@ class CUDA_SOFTPOOL2d(Function):
             stride = kernel
         else:
             stride = _pair(stride)
-        oH = H//stride[0]
-        oW = W//stride[1]
+        oH = (H - kernel[0]) // stride[0] + 1
+        oW = (W - kernel[1]) // stride[1] + 1
         output = input.new_zeros((B, C, oH, oW))
         softpool_cuda.forward_2d(input.contiguous(), kernel, stride, output)
         ctx.save_for_backward(input)
@@ -92,9 +92,9 @@ class CUDA_SOFTPOOL3d(Function):
             stride = kernel
         else:
             stride = _triple(stride)
-        oD = D//stride[0]
-        oH = H//stride[1]
-        oW = W//stride[2]
+        oD = (D - kernel[0]) // stride[0] + 1
+        oH = (H - kernel[1]) // stride[1] + 1
+        oW = (W - kernel[2]) // stride[2] + 1
         output = input.new_zeros((B, C, oD, oH, oW))
         softpool_cuda.forward_3d(input.contiguous(), kernel, stride, output)
         ctx.save_for_backward(input)
@@ -150,9 +150,11 @@ def soft_pool1d(x, kernel_size=2, stride=None, force_inplace=False):
     _, c, d = x.size()
     # Create exponential mask (should be similar to max-like pooling)
     e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    e_x = torch.clamp(e_x , float(0), float('inf'))
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d] -> [b x c x d']
-    return F.avg_pool1d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool1d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    x = F.avg_pool1d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool1d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return torch.clamp(x , float(0), float('inf'))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 1 D  ---
 '''
@@ -193,9 +195,11 @@ def soft_pool2d(x, kernel_size=2, stride=None, force_inplace=False):
     _, c, h, w = x.size()
     # Create exponential mask (should be similar to max-like pooling)
     e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    e_x = torch.clamp(e_x , float(0), float('inf'))
     # Apply mask to input and pool and calculate the exponential sum
-    # Tensor: [b x c x h x w] -> [b x c x h' x w']
-    return F.avg_pool2d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool2d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    # Tensor: [b x c x d] -> [b x c x d']
+    x = F.avg_pool2d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool2d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return torch.clamp(x , float(0), float('inf'))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 2 D  ---
 '''
@@ -236,9 +240,11 @@ def soft_pool3d(x, kernel_size=2, stride=None, force_inplace=False):
     _, c, d, h, w = x.size()
     # Create exponential mask (should be similar to max-like pooling)
     e_x = torch.sum(torch.exp(x),dim=1,keepdim=True)
+    e_x = torch.clamp(e_x , float(0), float('inf'))
     # Apply mask to input and pool and calculate the exponential sum
     # Tensor: [b x c x d x h x w] -> [b x c x d' x h' x w']
-    return F.avg_pool3d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool3d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    x = F.avg_pool3d(x.mul(e_x), kernel_size, stride=stride).mul_(sum(kernel_size)).div_(F.avg_pool3d(e_x, kernel_size, stride=stride).mul_(sum(kernel_size)))
+    return torch.clamp(x , float(0), float('inf'))
 '''
 ---  E N D  O F  F U N C T I O N  S O F T _ P O O L 3 D  ---
 '''

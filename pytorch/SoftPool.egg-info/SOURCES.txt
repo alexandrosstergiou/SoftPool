@@ -1,0 +1,9 @@
+setup.py
+CUDA/softpool_cuda.cpp
+CUDA/softpool_cuda_kernel.cu
+SoftPool/__init__.py
+SoftPool/idea.py
+SoftPool.egg-info/PKG-INFO
+SoftPool.egg-info/SOURCES.txt
+SoftPool.egg-info/dependency_links.txt
+SoftPool.egg-info/top_level.txt
