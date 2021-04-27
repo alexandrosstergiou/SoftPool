@@ -1,2 +1,0 @@
-SoftPool
-softpool_cuda
