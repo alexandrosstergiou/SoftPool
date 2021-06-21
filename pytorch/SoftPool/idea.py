@@ -9,6 +9,7 @@ import softpool_cuda
 
 class CUDA_SOFTPOOL1d(Function):
     @staticmethod
+    @torch.cuda.amp.custom_fwd(cast_inputs=torch.float32)
     def forward(ctx, input, kernel=2, stride=None):
         # Create contiguous tensor (if tensor is not contiguous)
         no_batch = False
@@ -32,6 +33,7 @@ class CUDA_SOFTPOOL1d(Function):
         return output
 
     @staticmethod
+    @torch.cuda.amp.custom_bwd
     def backward(ctx, grad_output):
         # Create contiguous tensor (if tensor is not contiguous)
         grad_input = torch.zeros_like(ctx.saved_tensors[0])
@@ -44,6 +46,7 @@ class CUDA_SOFTPOOL1d(Function):
 
 class CUDA_SOFTPOOL2d(Function):
     @staticmethod
+    @torch.cuda.amp.custom_fwd(cast_inputs=torch.float32)
     def forward(ctx, input, kernel=2, stride=None):
         # Create contiguous tensor (if tensor is not contiguous)
         no_batch = False
@@ -68,6 +71,7 @@ class CUDA_SOFTPOOL2d(Function):
         return output
 
     @staticmethod
+    @torch.cuda.amp.custom_bwd
     def backward(ctx, grad_output):
         # Create contiguous tensor (if tensor is not contiguous)
         grad_input = torch.zeros_like(ctx.saved_tensors[0])
@@ -80,6 +84,7 @@ class CUDA_SOFTPOOL2d(Function):
 
 class CUDA_SOFTPOOL3d(Function):
     @staticmethod
+    @torch.cuda.amp.custom_fwd(cast_inputs=torch.float32)
     def forward(ctx, input, kernel=2, stride=None):
         # Create contiguous tensor (if tensor is not contiguous)
         no_batch = False
@@ -105,6 +110,7 @@ class CUDA_SOFTPOOL3d(Function):
         return output
 
     @staticmethod
+    @torch.cuda.amp.custom_bwd
     def backward(ctx, grad_output):
         # Create contiguous tensor (if tensor is not contiguous)
         grad_input = torch.zeros_like(ctx.saved_tensors[0])

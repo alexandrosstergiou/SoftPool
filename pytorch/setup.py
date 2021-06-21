@@ -16,5 +16,5 @@ setup(
         ]),
     ],
     cmdclass={
-        'build_ext': BuildExtension
+        'build_ext': BuildExtension.with_options(use_ninja=False)
     })
