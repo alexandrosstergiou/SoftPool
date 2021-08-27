@@ -1,15 +1,16 @@
 # Refining activation downsampling with SoftPool
-![supported versions](https://img.shields.io/badge/python-3.5%2C3.6-brightgreen/?style=flat&logo=python&color=green)
+![supported versions](https://img.shields.io/badge/python-3.5%2C3.8-brightgreen/?style=flat&logo=python&color=green)
 ![Library](https://img.shields.io/badge/library-PyTorch-blue?logo=Pytorch)
 ![GitHub license](https://img.shields.io/cocoapods/l/AFNetworking)
 
 
 --------------------------------------------------------------------------------
 ## Abstract
-Convolutional Neural Networks (CNNs) use pooling to decrease the size of activation maps. This process is crucial to locally achieve spatial invariance and to increase the receptive field of subsequent convolutions. Pooling operations should minimize the loss of information in the activation maps. At the same time, the computation and memory overhead should be limited. To meet these requirements, we propose SoftPool: a fast and efficient method that sums exponentially weighted activations. Compared to a range of other pooling methods, SoftPool retains more information in the downsampled activation maps. More refined downsampling leads to better classification accuracy. On ImageNet1K, for a range of popular CNN architectures, replacing the original pooling operations with SoftPool leads to consistent accuracy improvements in the order of 1-2%. We also test SoftPool on video datasets for action recognition. Again, replacing only the pooling layers consistently increases accuracy while computational load and memory remain limited. These favorable properties make SoftPool an excellent replacement for current pooling operations, including max-pool and average-pool. <p align="center">
+Convolutional Neural Networks (CNNs) use pooling to decrease the size of activation maps. This process is crucial to increase the receptive fields and to reduce computational requirements of subsequent convolutions. An important feature of the pooling operation is the minimization of information loss, with respect to the initial activation maps, without a significant impact on the computation and memory overhead. To meet these requirements, we propose SoftPool: a fast and efficient method for exponentially weighted activation downsampling. Through experiments across a range of architectures and pooling methods, we demonstrate that SoftPool can retain more information in the reduced activation maps. This refined downsampling leads to improvements in a CNN's classification accuracy. Experiments with pooling layer substitutions on ImageNet1K show an increase in accuracy over both original architectures and other pooling methods. We also test SoftPool on video datasets for action recognition. Again, through the direct replacement of pooling layers, we observe consistent performance improvements while computational loads and memory requirements remain limited. <p align="center">
 
 <i></i>
 <br>
+<p align="center">To appear in <a href="http://iccv2021.thecvf.com/home"> IEEE International Conference on Computer Vision (ICCV) 2021</a> </p>
 <p align="center">
 <a href="https://arxiv.org/abs/2101.00440" target="blank" >[arXiv preprint ]</a>
 </p>
@@ -79,11 +80,12 @@ ImageNet weight can be downloaded from the following links:
 ## Citation
 
 ```
-@article{ stergiou2021refining,
+@inproceedings{stergiou2021refining,
   title={Refining activation downsampling with SoftPool},
   author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},
-  journal={arXiv preprint arXiv:2101.00440},
-  year={2021}
+  booktitle={International Conference on Computer Vision (ICCV)},
+  year={2021},
+  organization={IEEE}
 }
 ```
 
