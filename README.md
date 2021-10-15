@@ -1,5 +1,5 @@
 # Refining activation downsampling with SoftPool
-![supported versions](https://img.shields.io/badge/python-3.5%2C3.8-brightgreen/?style=flat&logo=python&color=green)
+![supported versions](https://img.shields.io/badge/python-3.x-brightgreen/?style=flat&logo=python&color=green)
 ![Library](https://img.shields.io/badge/library-PyTorch-blue?logo=Pytorch)
 ![GitHub license](https://img.shields.io/cocoapods/l/AFNetworking)
 
@@ -10,9 +10,13 @@ Convolutional Neural Networks (CNNs) use pooling to decrease the size of activat
 
 <i></i>
 <br>
-<p align="center">To appear in <a href="http://iccv2021.thecvf.com/home"> IEEE International Conference on Computer Vision (ICCV) 2021</a> </p>
+<i><p align="center"> To appear in <a href="http://iccv2021.thecvf.com/home"> IEEE International Conference on Computer Vision (ICCV) 2021</a></p></i>
 <p align="center">
-<a href="https://arxiv.org/abs/2101.00440" target="blank" >[arXiv preprint ]</a>
+<a href="https://arxiv.org/abs/2101.00440" target="blank" >[arXiv preprint]</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://openaccess.thecvf.com/content/ICCV2021/html/Stergiou_Refining_Activation_Downsampling_With_SoftPool_ICCV_2021_paper.html" target="_blank">[CVF open access]</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://www.youtube.com/watch?v=iqsMoVQSyDw" target="blank" >[video presentation]</a>
 </p>
 
 Image based pooling. Images are sub-sampled in both height and width by half.
@@ -85,6 +89,7 @@ ImageNet weight can be downloaded from the following links:
   author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},
   booktitle={International Conference on Computer Vision (ICCV)},
   year={2021},
+  pages={10357-10366},
   organization={IEEE}
 }
 ```
