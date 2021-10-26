@@ -5,6 +5,9 @@
 
 
 --------------------------------------------------------------------------------
+#### Update 10/2021:
+We have extended this work with in our paper: ***AdaPool: Exponential Adaptive Pooling for Information-Retaining Downsampling***. Info, code and resources are available at [`alexandrosstergiou/adaPool`](https://github.com/alexandrosstergiou/adaPool)
+
 ## Abstract
 Convolutional Neural Networks (CNNs) use pooling to decrease the size of activation maps. This process is crucial to increase the receptive fields and to reduce computational requirements of subsequent convolutions. An important feature of the pooling operation is the minimization of information loss, with respect to the initial activation maps, without a significant impact on the computation and memory overhead. To meet these requirements, we propose SoftPool: a fast and efficient method for exponentially weighted activation downsampling. Through experiments across a range of architectures and pooling methods, we demonstrate that SoftPool can retain more information in the reduced activation maps. This refined downsampling leads to improvements in a CNN's classification accuracy. Experiments with pooling layer substitutions on ImageNet1K show an increase in accuracy over both original architectures and other pooling methods. We also test SoftPool on video datasets for action recognition. Again, through the direct replacement of pooling layers, we observe consistent performance improvements while computational loads and memory requirements remain limited. <p align="center">
 
