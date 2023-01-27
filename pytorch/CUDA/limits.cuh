@@ -116,8 +116,8 @@ struct n_limits<float> {
   static inline __host__ __device__ float lowest() { return -FLT_MAX; }
   static inline __host__ __device__ float min() { return FLT_MIN; }
   static inline __host__ __device__ float max() { return FLT_MAX; }
-  static inline __host__ __device__ float lower_bound() { return -static_cast<float>(inf); }
-  static inline __host__ __device__ float upper_bound() { return static_cast<float>(inf); }
+  static inline __host__ __device__ float lower_bound() { return -std::numeric_limits<float>::infinity(); }
+  static inline __host__ __device__ float upper_bound() { return std::numeric_limits<float>::infinity(); }
 };
 
 template <>
@@ -125,8 +125,8 @@ struct n_limits<double> {
   static inline __host__ __device__ double lowest() { return -DBL_MAX; }
   static inline __host__ __device__ double min() { return DBL_MIN; }
   static inline __host__ __device__ double max() { return DBL_MAX; }
-  static inline __host__ __device__ double lower_bound() { return -inf; }
-  static inline __host__ __device__ double upper_bound() { return inf; }
+  static inline __host__ __device__ double lower_bound() { return -std::numeric_limits<double>::infinity(); }
+  static inline __host__ __device__ double upper_bound() { return std::numeric_limits<double>::infinity(); }
 };
 
 } // namespace at
